@@ -1,0 +1,7 @@
+.vscode
+.DS_Store
+*__pycache__*
+.ipynb_checkpoints
+src/vqa_models/vqa_lxr955_animals_fromScratch_20epochs/datamaps_stats.json
+src/vqa_models/vqa_lxr955_sports_fromScratch_20epochs/datamaps_stats.json
+src/coco
