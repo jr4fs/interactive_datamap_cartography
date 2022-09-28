@@ -113,7 +113,7 @@ app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig, clear_on_unhover=True),
     dcc.Tooltip(id="graph-tooltip"),
     dcc.Graph(id="graph2", figure=fig2),
-    html.Iframe(id="embedded-pdf", src=base_path+"easy_question_distribution.pdf"),
+    html.Iframe(id="embedded-pdf", src="assets/easy_question_distribution.pdf"),
     html.H1(
         children="ML Dashboard",
         style={
