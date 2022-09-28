@@ -101,9 +101,14 @@ def create_figures(base_path, title, hue_metric='correct.'):
 
     return fig, fig2, dataframe
 
-base_path ='assets/vqa_models/vqa_lxr955_animals_fromScratch_20epochs_breeds/'
+base_path_one ='assets/vqa_models/vqa_lxr955_animals_fromScratch_20epochs_breeds/'
 title='VQA LXMERT955-Animals From Scratch - 20 epochs'
-fig, fig2, dataframe = create_figures(base_path, title)
+fig, fig2, dataframe = create_figures(base_path_one, title)
+
+base_path_two ='assets/vqa_models/vqa_lxr111_animals_fromScratch_20epochs_breeds/'
+title='VQA LXMERT111-Animals From Scratch - 20 epochs'
+fig3, fig4, dataframe_two = create_figures(base_path_two, title)
+
 
 app = Dash(__name__)
 server = app.server 
@@ -113,13 +118,22 @@ app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig, clear_on_unhover=True),
     dcc.Tooltip(id="graph-tooltip"),
     dcc.Graph(id="graph2", figure=fig2),
-    html.Iframe(id="easy_question", src=base_path+"easy_question_distribution.pdf", height="200", width="1200"),
-    html.Iframe(id="easy_target", src=base_path+"easy_target_distribution.pdf", height="200", width="1200"),
-    html.Iframe(id="hard_question", src=base_path+"hard_question_distribution.pdf", height="200", width="1200"),
-    html.Iframe(id="hard_target", src=base_path+"hard_target_distribution.pdf", height="200", width="1200"),
-    html.Iframe(id="ambiguous_question", src=base_path+"ambiguous_question_distribution.pdf", height="200", width="1200"),
-    html.Iframe(id="ambiguous_target", src=base_path+"ambiguous_target_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="easy_question", src=base_path_one+"easy_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="easy_target", src=base_path_one+"easy_target_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="hard_question", src=base_path_one+"hard_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="hard_target", src=base_path_one+"hard_target_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="ambiguous_question", src=base_path_one+"ambiguous_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="ambiguous_target", src=base_path_one+"ambiguous_target_distribution.pdf", height="200", width="1400"),
 
+    dcc.Graph(id="graph_model2", figure=fig3, clear_on_unhover=True),
+    dcc.Tooltip(id="graph-tooltip2"),
+    dcc.Graph(id="graph3", figure=fig4),
+    html.Iframe(id="easy_question_two", src=base_path_two+"easy_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="easy_target_two", src=base_path_two+"easy_target_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="hard_question_two", src=base_path_two+"hard_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="hard_target_two", src=base_path_two+"hard_target_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="ambiguous_question_two", src=base_path_two+"ambiguous_question_distribution.pdf", height="200", width="1400"),
+    html.Iframe(id="ambiguous_target_two", src=base_path_two+"ambiguous_target_distribution.pdf", height="200", width="1400"),
 ])
 
 
@@ -166,4 +180,46 @@ def display_hover(hoverData):
 
     return True, bbox, children
 
+@app.callback(
+    Output("graph-tooltip2", "show"),
+    Output("graph-tooltip2", "bbox"),
+    Output("graph-tooltip2", "children"),
+    Input("graph_model2", "hoverData"),
+)
+def display_hover(hoverData):
+    if hoverData is None:
+        return False, no_update, no_update
+
+    # demo only shows the first point, but other points may also be available
+    pt = hoverData["points"][0]
+    bbox = pt["bbox"]
+    num = pt["pointNumber"]
+
+    df_row = dataframe_two.iloc[num]
+    #img_src = df_row['IMG_URL']
+    #name = df_row['NAME']
+    variability = df_row['variability']
+    confidence = df_row['confidence']
+    correctness = df_row['correctness']
+    predictions = df_row['Predictions']
+    question = df_row['Question']
+    target = df_row['Target']
+    img_src = df_row['Image URL']
+
+    children = [
+        html.Div(children=[
+            html.Img(src=img_src, style={"width": "100%"}),
+            #html.H2(f"{name}", style={"color": "darkblue"}),
+            #html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()), style={"width": "100%"}),
+            html.P(f"Question: {question}"),
+            html.P(f"Target: {target}"),
+            html.P(f"Predictions: {predictions}"),
+            html.P(f"Variability: {variability}"),
+            html.P(f"Confidence: {confidence}"),
+            html.P(f"Correctness: {correctness}"),
+        ],
+        style={'width': '200px', 'white-space': 'normal'})
+    ]
+
+    return True, bbox, children
 if __name__ == "__main__":app.run_server(debug=False, host='0.0.0.0', port=8090)
