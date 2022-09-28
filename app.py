@@ -101,7 +101,7 @@ def create_figures(base_path, title, hue_metric='correct.'):
 
     return fig, fig2, dataframe
 
-base_path ='src/vqa_models/vqa_lxr955_animals_fromScratch_20epochs/'
+base_path ='src/vqa_models/vqa_lxr955_animals_fromScratch_20epochs_breeds/'
 title='VQA LXMERT955-Animals From Scratch - 20 epochs'
 fig, fig2, dataframe = create_figures(base_path, title)
 
@@ -113,6 +113,14 @@ app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig, clear_on_unhover=True),
     dcc.Tooltip(id="graph-tooltip"),
     dcc.Graph(id="graph2", figure=fig2),
+    html.Iframe(id="embedded-pdf", src="assets/easy_question_distribution.pdf"),
+    html.H1(
+        children="ML Dashboard",
+        style={
+            "color": "black",
+            "text-align": "center"
+        },
+    )
 ])
 
 
