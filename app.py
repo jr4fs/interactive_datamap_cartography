@@ -113,12 +113,12 @@ app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig, clear_on_unhover=True),
     dcc.Tooltip(id="graph-tooltip"),
     dcc.Graph(id="graph2", figure=fig2),
-    html.Iframe(id="easy_question", src=base_path+"easy_question_distribution.pdf", height="200", width="1000"),
-    html.Iframe(id="easy_target", src=base_path+"easy_target_distribution.pdf", height="200", width="1000"),
-    html.Iframe(id="hard_question", src=base_path+"hard_question_distribution.pdf", height="200", width="1000"),
-    html.Iframe(id="hard_target", src=base_path+"hard_target_distribution.pdf", height="200", width="1000"),
-    html.Iframe(id="ambiguous_question", src=base_path+"ambiguous_question_distribution.pdf", height="200", width="1000"),
-    html.Iframe(id="ambiguous_target", src=base_path+"ambiguous_target_distribution.pdf", height="200", width="1000"),
+    html.Iframe(id="easy_question", src=base_path+"easy_question_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="easy_target", src=base_path+"easy_target_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="hard_question", src=base_path+"hard_question_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="hard_target", src=base_path+"hard_target_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="ambiguous_question", src=base_path+"ambiguous_question_distribution.pdf", height="200", width="1200"),
+    html.Iframe(id="ambiguous_target", src=base_path+"ambiguous_target_distribution.pdf", height="200", width="1200"),
 
 ])
 
