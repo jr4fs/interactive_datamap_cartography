@@ -1,3 +1,9 @@
 easy IOU: 0.666, confidence_threshold: 0.8, variability_threshold: 0.2
 hard IOU: 0.148, confidence_threshold: 0.2, variability_threshold: 0.2
 ambiguous IOU: 0.721, confidence_threshold: 0.2, variability_threshold: 0.2
+easy IOU: 1.0, confidence_threshold: 0.8, variability_threshold: 0.2
+hard IOU: 1.0, confidence_threshold: 0.2, variability_threshold: 0.2
+ambiguous IOU: 1.0, confidence_threshold: 0.2, variability_threshold: 0.2
+easy IOU: 0.666, confidence_threshold: 0.8, variability_threshold: 0.2
+hard IOU: 0.148, confidence_threshold: 0.2, variability_threshold: 0.2
+ambiguous IOU: 0.721, confidence_threshold: 0.2, variability_threshold: 0.2
